@@ -1,5 +1,5 @@
 - name: Update Raspberry Pis
-  hosts: Pis
+  hosts: pis
   become: yes
 
   tasks:
