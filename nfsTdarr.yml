@@ -1,0 +1,11 @@
+- name: Modify /etc/fstab on Raspberry Pis
+  hosts: pis
+  become: yes
+  
+  tasks:
+    - name: Ensure a block of lines is present in /etc/fstab
+      blockinfile:
+        path: /etc/fstab
+        block: |
+          192.168.1.3:/PLEX /mnt/Media nfs rw,auto,nofail
+          192.168.1.63:/mnt/SwarmShare/Temp /mnt/SwarmShare/Temp nfs rw,auto,nofail
