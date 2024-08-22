@@ -7,5 +7,5 @@
       blockinfile:
         path: /etc/fstab
         block: |
-          {{ fstabtest }}
-          {{ fstabtest2 }}
+          {{fstabtest}}
+          {{fstabtest2}}
