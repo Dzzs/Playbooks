@@ -1,7 +1,8 @@
 - name: Update Debian / Ubuntu Systems
   hosts: ubuntuHosts
   become: yes
-
+  become_method: sudo
+  
   tasks:
     - name: Update apt cache
       apt:
