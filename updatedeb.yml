@@ -1,0 +1,16 @@
+- name: Update Debian / Ubuntu Systems
+  hosts: ubuntuHosts
+  become: yes
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Upgrade all packages
+      apt:
+        upgrade: dist
+
+    - name: Remove unused packages
+      apt:
+        autoremove: yes
