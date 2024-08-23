@@ -2,9 +2,6 @@
 - name: Remove unused Docker images
   hosts: all
   become: yes
-  
   tasks:
     - name: Prune unused Docker images
       shell: docker image prune -f
-      args:
-        warn: false
