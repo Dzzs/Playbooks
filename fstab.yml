@@ -17,7 +17,7 @@
       blockinfile:
         path: /etc/fstab
         block: |
-          {{fstab}}
+          "{{fstab}}"
 
     - name: Remount all filesystems defined in fstab
       command: mount -a
