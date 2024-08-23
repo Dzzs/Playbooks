@@ -1,0 +1,41 @@
+---
+- name: Backup /var directory with versioning
+  hosts: "{{targets}}"
+  become: yes
+  vars:
+    nfs_share: "/mnt/backup"
+    backup_dir: "{{nfs_share}}/{{inventory_hostname}}"
+    timestamp: "{{ansible_date_time.iso8601_basic}}"
+  tasks:
+
+    - name: Create backup directory on NFS share
+      file:
+        path: "{{backup_dir}}"
+        state: directory
+        mode: '0755'
+
+    - name: Rename existing backup to previous version (if exists)
+      command: mv "{{backup_dir}}/var" "{{backup_dir}}/var_old"
+      args:
+        removes: "{{backup_dir}}/var_old"
+      ignore_errors: yes
+
+    - name: Backup /var directory to a new version directory
+      synchronize:
+        src: /var/
+        dest: "{{backup_dir}}/var/"
+        delete: yes
+        archive: yes
+
+    - name: Move the new backup to versioned directory
+      command: mv "{{backup_dir}}/var" "{{backup_dir}}/var_{{timestamp}}"
+      args:
+        creates: "{{backup_dir}}/var_{{timestamp}}"
+
+    - name: Verify backup completion
+      command: ls "{{backup_dir}}/var/"
+      register: backup_contents
+
+    - name: Show backup contents
+      debug:
+        msg: "Backup for {{inventory_hostname}}: {{backup_contents.stdout_lines}}"
