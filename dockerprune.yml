@@ -1,6 +1,6 @@
 ---
 - name: Remove all unused Docker images
-  hosts: all
+  hosts: {{hosts}}
   become: yes
   tasks:
     - name: Prune all unused Docker images
