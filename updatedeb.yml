@@ -1,5 +1,5 @@
 - name: Update Debian / Ubuntu Systems
-  hosts: ubuntuHosts
+  hosts: {{hosts}}
   become: yes
   
   tasks:
