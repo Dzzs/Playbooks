@@ -1,0 +1,15 @@
+- name: Install and configure Docker
+  hosts: "{{targets}}"
+  become: yes
+  
+  tasks:
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+    
+    - name: Ensure Docker service is running
+      service:
+        name: docker
+        state: started
+        enabled: yes
