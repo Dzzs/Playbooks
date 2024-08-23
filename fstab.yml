@@ -1,0 +1,25 @@
+- name: Modify /etc/fstab on specified hosts
+  hosts: "{{hosts}}"
+  become: yes
+  
+  tasks:
+    - name: Install NFS client
+      apt:
+        name: nfs-common
+        state: present
+    
+    - name: Install CIFS/SMB client
+      apt:
+        name: cifs-utils
+        state: present
+    
+    - name: Ensure a block of lines is present in /etc/fstab
+      blockinfile:
+        path: /etc/fstab
+        block: |
+          {{fstab}}
+
+    - name: Remount all filesystems defined in fstab
+      command: mount -a
+      become: yes
+
