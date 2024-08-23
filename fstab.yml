@@ -1,5 +1,5 @@
 - name: Modify /etc/fstab on specified hosts
-  hosts: "{{hosts}}"
+  hosts: "{{targets}}"
   become: yes
   
   tasks:
