@@ -1,7 +1,7 @@
 ---
-- name: Remove unused Docker images
+- name: Remove all unused Docker images
   hosts: all
   become: yes
   tasks:
-    - name: Prune unused Docker images
-      shell: docker image prune -f
+    - name: Prune all unused Docker images
+      shell: docker image prune -a -f
