@@ -1,4 +1,3 @@
----
 - name: Backup /var directory with versioning
   hosts: "{{targets}}"
   become: yes
