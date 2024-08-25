@@ -2,8 +2,8 @@
   hosts: "{{targets}}"
   become: yes
   vars:
-    nfs_share: "/mnt/backup"
-    backup_dir: "{{backup_dest}}/{{inventory_hostname}}"
+    nfs_share: "/mnt/Backup"
+    backup_dir: "{{nfs_share}}/{{inventory_hostname}}"
     timestamp: "{{ansible_date_time.iso8601_basic}}"
   tasks:
 
