@@ -20,11 +20,9 @@
       ignore_errors: yes
 
     - name: Backup /var directory to a new version directory
-      synchronize:
-        src: /var/
-        dest: "{{backup_dir}}/var/"
-        delete: yes
-        archive: yes
+      command: cp -a /var "{{backup_dir}}/var"
+      args:
+        creates: "{{backup_dir}}/var"
 
     - name: Move the new backup to versioned directory
       command: mv "{{backup_dir}}/var" "{{backup_dir}}/var_{{timestamp}}"
@@ -32,7 +30,7 @@
         creates: "{{backup_dir}}/var_{{timestamp}}"
 
     - name: Verify backup completion
-      command: ls "{{backup_dir}}/var/"
+      command: ls "{{backup_dir}}/var_{{timestamp}}"
       register: backup_contents
 
     - name: Show backup contents
