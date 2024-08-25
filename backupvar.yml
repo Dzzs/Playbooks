@@ -3,7 +3,7 @@
   become: yes
   vars:
     nfs_share: "/mnt/backup"
-    backup_dir: "{{nfs_share}}/{{inventory_hostname}}"
+    backup_dir: "{{backup_dest}}/{{inventory_hostname}}"
     timestamp: "{{ansible_date_time.iso8601_basic}}"
   tasks:
 
