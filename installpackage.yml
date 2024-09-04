@@ -1,6 +1,7 @@
 - name: Update APT cache and install a package
   hosts: "{{targets}}"
   become: yes
+  
   tasks:
     - name: Update APT cache
       apt:
